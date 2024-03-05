@@ -35,7 +35,7 @@ pulumi config set cloud:ecsClusterARN true
 ### Before deploying to Azure:
 ```
 az login
-az account set -s f1414fb0-566b-41f5-a09b-41d9981ce0dd
+az account set -s <subscriptionId>
 pulumi config set cloud:provider azure
 pulumi config set cloud-azure:location eastus
 ```
