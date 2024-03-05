@@ -1,0 +1,9 @@
+{
+    "name": "pulumi-cloud-example",
+    "main": "index.js",
+    "dependencies": {
+        "@pulumi/cloud": "dev",
+        "@pulumi/cloud-aws": "dev",
+        "@pulumi/cloud-azure": "dev"
+    }
+}

@@ -1,0 +1,6 @@
+name: pulumi-cloud-example
+runtime:
+  name: nodejs
+  options:
+    typescript: false
+description: A minimal JavaScript Pulumi program
