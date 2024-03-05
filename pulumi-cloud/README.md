@@ -73,3 +73,36 @@ Show list of all subscriptions in account:
 ```
 az account list
 ```
+## Errors troubleshooting
+
+#### error: Only public ip address types are supported by Azure currently.
+Fixed with adding *external: true*
+```ports: [{ port: 80, external: true}],```
+
+#### error: Only a single replicable is supported in Azure currently.
+fixed with deleting *replicas:2*
+
+#### error: azure:containerservice/group:Group resource 'examples-nginx' has a problem: Invalid or unknown key. Examine values at 'examples-nginx.containers[0].protocol'.
+fixed with deleting *protocol: "http"*. Then default TCP protocol is set. But container works with TCP.
+```ports: [{ port: 80, external: true, protocol: "http"}],```
+
+#### Container Group Name: "pulumi-nginxd5be97f0"): performing ContainerGroupsCreateOrUpdate: containerinstance.ContainerInstanceClient#ContainerGroupsCreateOrUpdate: Failure sending request: StatusCode=0 -- Original Error: Code="InvalidContainerPorts" Message="The ports '0' are invalid for container 'pulumi-nginx-nginx' in container group 'pulumi-nginxd5be97f0'. The port must be beteween 1 and 65535." 
+Fixed with:
+gives error: 
+```
+let nginx = new cloud.Service("examples-nginx", {
+    containers: {
+        nginx: {
+            image: "nginx",
+            memory: 128,
+            port: 80
+```
+fixed:
+```
+let nginx = new cloud.Service("examples-nginx", {
+    containers: {
+        nginx: {
+            image: "nginx",
+            memory: 128,
+            ports: [{ port: 80, external: true}],
+```
